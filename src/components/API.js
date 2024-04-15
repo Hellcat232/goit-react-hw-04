@@ -9,10 +9,10 @@ const params = {
 };
 
 export const fetchApi = async (query, page) => {
-  const response = await axios.get(
+  const { data } = await axios.get(
     `https://api.unsplash.com/search/photos?query=${query}&page=${page}`,
     { params }
   );
-  console.log(response);
-  return response;
+
+  return data;
 };

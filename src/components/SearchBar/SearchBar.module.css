@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100wv;
+  height: 60px;
+  background-color: rgb(133, 133, 203);
+}
+
+.form {
+  position: relative;
+  width: 100vw;
+  height: 35px;
+}
+
+.button {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  background-color: transparent;
+  /* height: 1px;
+  width: 1px; */
+  border: none;
+  padding: 0;
+}
+
+.input {
+  padding: 10px 10px 10px 20px;
+  width: 300px;
+  height: 10px;
+}
+
+.input::placeholder {
+  padding-left: 20%;
+  margin-left: 20px;
+}
+
+.button:hover {
+  border: none;
+}
+.button:focus {
+  border: none;
+}
