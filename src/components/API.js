@@ -5,7 +5,7 @@ axios.defaults.headers.common["Authorization"] =
 
 const params = {
   orientation: "landscape",
-  per_page: 15,
+  per_page: 20,
 };
 
 export const fetchApi = async (query, page) => {

@@ -1,17 +1,17 @@
 import ImageCard from "../ImageCard/ImageCard";
+import css from "./ImageGallery.module.css";
 
 const ImageGallery = ({ photos }) => {
-  console.log(photos);
   return (
-    <ul>
-      {photos.map((photo) => {
-        console.log(photo);
-        return (
-          <li key={photo.id}>
-            <ImageCard card={photo} />
-          </li>
-        );
-      })}
+    <ul className={css.items}>
+      {photos &&
+        photos.map((photo, index) => {
+          return (
+            <li key={`${photo.id}_${index}`} className={css.item}>
+              <ImageCard card={photo} />
+            </li>
+          );
+        })}
     </ul>
   );
 };

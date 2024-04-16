@@ -1,0 +1,12 @@
+.error {
+  margin: 100px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.message {
+  font-weight: 400;
+  font-size: 50px;
+}
