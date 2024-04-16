@@ -6,6 +6,7 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader.jsx";
 import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx";
 import LoadMore from "../LoadMore/LoadMore.jsx";
+import Modal from "../Modal/Modal.jsx.jsx";
 const notify = () => toast("Please write something in the field!");
 
 const App = () => {
@@ -77,6 +78,8 @@ const App = () => {
       ) : (
         totalPage === page
       )}
+
+      <Modal />
 
       <Toaster
         toastOptions={{
