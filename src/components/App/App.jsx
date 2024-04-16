@@ -66,12 +66,16 @@ const App = () => {
 
       {loader && <Loader />}
 
-      {gallery.length > 0 && (
-        <LoadMore
-          more={() => {
-            setPage(page + 1);
-          }}
-        />
+      {<LoadMore /> ? (
+        gallery.length > 0 && (
+          <LoadMore
+            more={() => {
+              setPage(page + 1);
+            }}
+          />
+        )
+      ) : (
+        totalPage === page
       )}
 
       <Toaster
