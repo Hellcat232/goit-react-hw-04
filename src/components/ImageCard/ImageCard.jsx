@@ -1,20 +1,20 @@
 const ImageCard = ({
   card: {
-    urls: { small },
+    urls: { small, regular },
     alt_description,
   },
   openModal,
-  idx,
 }) => {
   return (
     <div>
       <img
-        onClick={openModal}
+        onClick={() => {
+          openModal(regular, alt_description);
+        }}
         src={small}
         alt={alt_description}
         width="400"
         height="300"
-        id={idx}
       />
     </div>
   );

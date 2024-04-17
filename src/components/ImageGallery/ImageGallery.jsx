@@ -4,10 +4,10 @@ import css from "./ImageGallery.module.css";
 const ImageGallery = ({ photos, onOpenModal }) => {
   return (
     <ul className={css.items}>
-      {photos.map((photo, index) => {
+      {photos.map((photo) => {
         return (
           <li key={photo.id} className={css.item}>
-            <ImageCard idx={index} openModal={onOpenModal} card={photo} />
+            <ImageCard openModal={onOpenModal} card={photo} />
           </li>
         );
       })}

@@ -19,22 +19,21 @@ const App = () => {
   const [totalPage, setTotalPage] = useState(0);
   const [page, setPage] = useState(1);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [clickOnCard, setClickOnCard] = useState(null);
-  console.log(clickOnCard);
+  const [opening, setOpening] = useState({ link: "", description: "" });
+  console.log(opening);
+
   const hendleSubmit = (query) => {
     setQuery(`${nanoid()}/${query}`);
     setPage(1);
     setTotalPage((prevTotalPage) => prevTotalPage[0]);
     setGallery([]);
-    setClickOnCard(null);
+
     setModalIsOpen(false);
   };
 
-  const hendleOpenModal = (event) => {
-    if (!event.currentTarget.closest("div")) return;
+  const hendleOpenModal = (urls, alt) => {
+    setOpening({ urls: urls, alt: alt });
 
-    const getID = event.target.id;
-    setClickOnCard(getID);
     setModalIsOpen(true);
   };
 
@@ -97,8 +96,8 @@ const App = () => {
           modalIsOpen={modalIsOpen}
           onClose={hendleCloseModal}
           onOpen={hendleOpenModal}
-          modalPhoto={gallery}
-          getID={clickOnCard}
+          regular={opening.link}
+          description={opening.description}
         />
       )}
 
