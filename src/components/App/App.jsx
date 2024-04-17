@@ -1,12 +1,14 @@
 import { fetchApi } from "../API";
 import { useEffect, useState } from "react";
+import { nanoid } from "nanoid";
 import toast, { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader.jsx";
 import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx";
 import LoadMore from "../LoadMore/LoadMore.jsx";
-import Modal from "../Modal/Modal.jsx";
+import ImageModal from "../ImageModal/ImageModal.jsx";
+
 const notify = () => toast("Please write something in the field!");
 
 const App = () => {
@@ -16,12 +18,28 @@ const App = () => {
   const [error, setError] = useState(false);
   const [totalPage, setTotalPage] = useState(0);
   const [page, setPage] = useState(1);
-
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [clickOnCard, setClickOnCard] = useState(null);
+  console.log(clickOnCard);
   const hendleSubmit = (query) => {
-    setQuery(query);
+    setQuery(`${nanoid()}/${query}`);
     setPage(1);
-    setTotalPage(0);
+    setTotalPage((prevTotalPage) => prevTotalPage[0]);
     setGallery([]);
+    setClickOnCard(null);
+    setModalIsOpen(false);
+  };
+
+  const hendleOpenModal = (event) => {
+    if (!event.currentTarget.closest("div")) return;
+
+    const getID = event.target.id;
+    setClickOnCard(getID);
+    setModalIsOpen(true);
+  };
+
+  const hendleCloseModal = () => {
+    setModalIsOpen(false);
   };
 
   useEffect(() => {
@@ -29,16 +47,11 @@ const App = () => {
 
     const savePhotos = async (query, page) => {
       setLoader(true);
-      setError(false);
 
       try {
         const { results, total_pages } = await fetchApi(query, page);
         setGallery((prevGallery) => [...prevGallery, ...results]);
-
-        if (total_pages !== totalPage) {
-          setTotalPage(total_pages);
-        }
-
+        setTotalPage(total_pages);
         setLoader(false);
       } catch (error) {
         setError(true);
@@ -48,7 +61,7 @@ const App = () => {
     };
 
     savePhotos(query, page);
-  }, [query, page, totalPage]);
+  }, [query, page]);
 
   return (
     <>
@@ -60,7 +73,7 @@ const App = () => {
       />
 
       {gallery.length > 0 ? (
-        <ImageGallery photos={gallery} />
+        <ImageGallery onOpenModal={hendleOpenModal} photos={gallery} />
       ) : (
         <ErrorMessage message={error} />
       )}
@@ -79,7 +92,15 @@ const App = () => {
         totalPage === page
       )}
 
-      <Modal />
+      {gallery.length > 0 && (
+        <ImageModal
+          modalIsOpen={modalIsOpen}
+          onClose={hendleCloseModal}
+          onOpen={hendleOpenModal}
+          modalPhoto={gallery}
+          getID={clickOnCard}
+        />
+      )}
 
       <Toaster
         toastOptions={{
