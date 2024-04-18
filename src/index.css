@@ -23,9 +23,15 @@ a:hover {
 }
 
 body {
-  width: 1440px;
+  width: 100%;
+
   display: flex;
-  place-items: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* place-items: center; */
 }
 
 h1 {

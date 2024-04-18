@@ -1,17 +1,20 @@
 .header {
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-evenly;
-  width: 100wv;
+  padding: 5px;
+  width: 100vw;
   height: 60px;
   background-color: rgb(133, 133, 203);
 }
 
 .form {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
   position: relative;
-  right: -40%;
 
-  width: 100vw;
+  width: 400px;
   height: 35px;
 }
 

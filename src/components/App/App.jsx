@@ -1,6 +1,7 @@
 import { fetchApi } from "../API";
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
+import css from "./App.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
 import ImageGallery from "../ImageGallery/ImageGallery";
@@ -62,7 +63,7 @@ const App = () => {
   }, [query, page]);
 
   return (
-    <>
+    <div className={css.app}>
       <SearchBar
         onEmpty={() => {
           notify();
@@ -105,7 +106,7 @@ const App = () => {
           },
         }}
       />
-    </>
+    </div>
   );
 };
 
