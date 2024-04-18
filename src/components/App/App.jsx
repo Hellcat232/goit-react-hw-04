@@ -6,7 +6,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader.jsx";
 import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx";
-import LoadMore from "../LoadMore/LoadMore.jsx";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.jsx";
 import ImageModal from "../ImageModal/ImageModal.jsx";
 
 const notify = () => toast("Please write something in the field!");
@@ -20,24 +20,23 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [opening, setOpening] = useState({ link: "", description: "" });
-  console.log(opening);
 
-  const hendleSubmit = (query) => {
+  const handleSubmit = (query) => {
     setQuery(`${nanoid()}/${query}`);
     setPage(1);
-    setTotalPage((prevTotalPage) => prevTotalPage[0]);
+    setTotalPage(0);
     setGallery([]);
 
     setModalIsOpen(false);
   };
 
-  const hendleOpenModal = (urls, alt) => {
+  const handleOpenModal = (urls, alt) => {
     setOpening({ urls: urls, alt: alt });
 
     setModalIsOpen(true);
   };
 
-  const hendleCloseModal = () => {
+  const handleCloseModal = () => {
     setModalIsOpen(false);
   };
 
@@ -68,34 +67,30 @@ const App = () => {
         onEmpty={() => {
           notify();
         }}
-        onSubmit={hendleSubmit}
+        onSubmit={handleSubmit}
       />
 
       {gallery.length > 0 ? (
-        <ImageGallery onOpenModal={hendleOpenModal} photos={gallery} />
+        <ImageGallery onOpenModal={handleOpenModal} photos={gallery} />
       ) : (
         <ErrorMessage message={error} />
       )}
 
       {loader && <Loader />}
 
-      {<LoadMore /> ? (
-        gallery.length > 0 && (
-          <LoadMore
-            more={() => {
-              setPage(page + 1);
-            }}
-          />
-        )
-      ) : (
-        totalPage === page
+      {gallery.length > 0 && !loader && page < totalPage && (
+        <LoadMoreBtn
+          more={() => {
+            setPage(page + 1);
+          }}
+        />
       )}
 
       {gallery.length > 0 && (
         <ImageModal
           modalIsOpen={modalIsOpen}
-          onClose={hendleCloseModal}
-          onOpen={hendleOpenModal}
+          onClose={handleCloseModal}
+          onOpen={handleOpenModal}
           links={opening}
         />
       )}

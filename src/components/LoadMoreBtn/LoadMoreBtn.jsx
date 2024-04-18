@@ -1,6 +1,6 @@
-import css from "./LoadMore.module.css";
+import css from "./LoadMoreBtn.module.css";
 
-const LoadMore = ({ more }) => {
+const LoadMoreBtn = ({ more }) => {
   if (!more) return;
 
   return (
@@ -12,4 +12,4 @@ const LoadMore = ({ more }) => {
   );
 };
 
-export default LoadMore;
+export default LoadMoreBtn;
