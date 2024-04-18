@@ -1,4 +1,6 @@
 import Modal from "react-modal";
+import css from "./ImageModal.module.css";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 Modal.setAppElement("#root");
 
 const customStyles = {
@@ -9,6 +11,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    backgroundColor: "azure",
   },
 
   overlay: {
@@ -22,8 +25,8 @@ const customStyles = {
   },
 };
 
-const ImageModal = ({ onClose, modalIsOpen, description, regular }) => {
-  console.log(description, regular);
+const ImageModal = ({ onClose, modalIsOpen, links }) => {
+  console.log(links.alt);
   return (
     <div>
       <Modal
@@ -32,9 +35,12 @@ const ImageModal = ({ onClose, modalIsOpen, description, regular }) => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        {/* <button onClick={onClose}>close</button> */}
+        <button className={css.button} onClick={onClose}>
+          <IoIosCloseCircleOutline />
+        </button>
         <div>
-          <img src={regular} alt={description} />
+          <img src={links.urls} alt={links.alt} />
+          <p className={css.description}>{links.alt}</p>
         </div>
       </Modal>
     </div>

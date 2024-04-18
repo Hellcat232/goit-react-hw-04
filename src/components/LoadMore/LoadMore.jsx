@@ -1,12 +1,14 @@
+import css from "./LoadMore.module.css";
+
 const LoadMore = ({ more }) => {
   if (!more) return;
 
   return (
-    <>
-      <button onClick={more} type="button">
+    <div className={css["load-more"]}>
+      <button className={css.button} onClick={more} type="button">
         Load more...
       </button>
-    </>
+    </div>
   );
 };
 

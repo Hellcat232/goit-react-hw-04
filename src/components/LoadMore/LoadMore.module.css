@@ -1,0 +1,12 @@
+.load-more {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px;
+  background-color: rgb(133, 133, 203);
+}

@@ -96,8 +96,7 @@ const App = () => {
           modalIsOpen={modalIsOpen}
           onClose={hendleCloseModal}
           onOpen={hendleOpenModal}
-          regular={opening.link}
-          description={opening.description}
+          links={opening}
         />
       )}
 
