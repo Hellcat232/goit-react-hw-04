@@ -26,14 +26,13 @@ const customStyles = {
 };
 
 const ImageModal = ({ onClose, modalIsOpen, links }) => {
-  console.log(links.alt);
   return (
     <div>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={onClose}
         style={customStyles}
-        contentLabel="Example Modal"
+        // contentLabel="Example Modal"
       >
         <button className={css.button} onClick={onClose}>
           <IoIosCloseCircleOutline />

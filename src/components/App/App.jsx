@@ -16,7 +16,7 @@ const App = () => {
   const [gallery, setGallery] = useState([]);
   const [query, setQuery] = useState("");
   const [loader, setLoader] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [totalPage, setTotalPage] = useState(0);
   const [page, setPage] = useState(1);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -27,7 +27,7 @@ const App = () => {
     setPage(1);
     setTotalPage(0);
     setGallery([]);
-
+    setOpening({ link: "", description: "" });
     setModalIsOpen(false);
   };
 
@@ -53,7 +53,7 @@ const App = () => {
         setTotalPage(total_pages);
         setLoader(false);
       } catch (error) {
-        setError(true);
+        setError(error.message);
       } finally {
         setLoader(false);
       }
@@ -71,11 +71,17 @@ const App = () => {
         onSubmit={handleSubmit}
       />
 
-      {gallery.length > 0 ? (
+      {/* {gallery.length > 0 ? (
         <ImageGallery onOpenModal={handleOpenModal} photos={gallery} />
       ) : (
         <ErrorMessage message={error} />
+      )} */}
+
+      {gallery.length > 0 && (
+        <ImageGallery onOpenModal={handleOpenModal} photos={gallery} />
       )}
+
+      {error !== "" && <ErrorMessage message={error} />}
 
       {loader && <Loader />}
 
@@ -87,7 +93,7 @@ const App = () => {
         />
       )}
 
-      {gallery.length > 0 && (
+      {modalIsOpen && (
         <ImageModal
           modalIsOpen={modalIsOpen}
           onClose={handleCloseModal}
