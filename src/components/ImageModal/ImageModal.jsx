@@ -25,7 +25,7 @@ const customStyles = {
   },
 };
 
-const ImageModal = ({ onClose, modalIsOpen, links }) => {
+const ImageModal = ({ onClose, modalIsOpen, link, description }) => {
   return (
     <div>
       <Modal
@@ -38,8 +38,8 @@ const ImageModal = ({ onClose, modalIsOpen, links }) => {
           <IoIosCloseCircleOutline />
         </button>
         <div>
-          <img src={links.urls} alt={links.alt} />
-          <p className={css.description}>{links.alt}</p>
+          <img src={link} alt={description} />
+          <p className={css.description}>{description}</p>
         </div>
       </Modal>
     </div>

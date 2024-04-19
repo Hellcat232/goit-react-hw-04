@@ -1,6 +1,5 @@
 import { fetchApi } from "../API";
 import { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
 import css from "./App.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
@@ -23,16 +22,17 @@ const App = () => {
   const [opening, setOpening] = useState({ link: "", description: "" });
 
   const handleSubmit = (query) => {
-    setQuery(`${nanoid()}/${query}`);
+    setQuery(`${Date.now()}/${query}`);
     setPage(1);
     setTotalPage(0);
     setGallery([]);
     setOpening({ link: "", description: "" });
     setModalIsOpen(false);
+    setError("");
   };
 
   const handleOpenModal = (urls, alt) => {
-    setOpening({ urls: urls, alt: alt });
+    setOpening({ link: urls, description: alt });
 
     setModalIsOpen(true);
   };
@@ -97,8 +97,8 @@ const App = () => {
         <ImageModal
           modalIsOpen={modalIsOpen}
           onClose={handleCloseModal}
-          onOpen={handleOpenModal}
-          links={opening}
+          link={opening.link}
+          description={opening.description}
         />
       )}
 
