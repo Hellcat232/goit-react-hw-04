@@ -17,12 +17,13 @@ const App = () => {
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState("");
   const [totalPage, setTotalPage] = useState(0);
-  const [page, setPage] = useState(1);
+  // const totalPage = useRef(0);
+  const [page, setPage] = useState(totalPage);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [opening, setOpening] = useState({ link: "", description: "" });
 
   const handleSubmit = (query) => {
-    setQuery(`${Date.now()}/${query}`);
+    setQuery(`${query}`);
     setPage(1);
     setTotalPage(0);
     setGallery([]);
@@ -50,6 +51,7 @@ const App = () => {
       try {
         const { results, total_pages } = await fetchApi(query, page);
         setGallery((prevGallery) => [...prevGallery, ...results]);
+
         setTotalPage(total_pages);
         setLoader(false);
       } catch (error) {
